@@ -1,6 +1,6 @@
 # importing the libraries.
-# Here I have imported Pandas library for reading csv files and creating dataFrames.
 from platform import python_version
+# Here I have imported Pandas library for reading csv files and creating dataFrames.
 import pandas as pd
 
 
