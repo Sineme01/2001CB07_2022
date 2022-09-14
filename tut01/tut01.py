@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def octact_identification(mod=5000):
-    #Here we created our dataFrame and named it matrix.
+    # Here we created our dataFrame and named it matrix.
     matrix = pd.read_csv("octant_input.csv")
     # Here using pandas library i have calculated mean of u,v,and w and stored it into a variable.
     uavg = matrix['U'].mean()
@@ -22,37 +22,37 @@ def octact_identification(mod=5000):
 
     # This is our output data Frame.
     submission = {"Time": matrix['Time'], "U": matrix["U"], "V": matrix["V"],
-                "W": matrix["W"], "U Avg": list1, "V Avg": list2, "W Avg": list3}
+                  "W": matrix["W"], "U Avg": list1, "V Avg": list2, "W Avg": list3}
 
     # Here we have made list of u-uavg, v-vavg, w-wavg.
-    u1 = [i-uavg for i in matrix['U']]
-    v1 = [i-vavg for i in matrix['V']]
-    w1 = [i-wavg for i in matrix['W']]
+    mat_u1 = [i-uavg for i in matrix['U']]
+    mat_v1 = [i-vavg for i in matrix['V']]
+    mat_w1 = [i-wavg for i in matrix['W']]
     col = pd.DataFrame(submission)
     # Here we are adding three columns in our data frmae for depicting three variables.
-    col["U'=U-Uavg"] = u1
-    col["V'=V-Vavg"] = v1
-    col["W'=W-Wavg"] = w1
+    col["U'=U-Uavg"] = mat_u1
+    col["V'=V-Vavg"] = mat_v1
+    col["W'=W-Wavg"] = mat_w1
 
     OctantValue = []
-    aa = col["U'=U-Uavg"].to_list()
-    bb = col["V'=V-Vavg"].to_list()
-    cc = col["W'=W-Wavg"].to_list()
+    a_uavg = col["U'=U-Uavg"].to_list()
+    b_vavg = col["V'=V-Vavg"].to_list()
+    c_cavg = col["W'=W-Wavg"].to_list()
     OctantValue = []
     d = {'+++': "+1", "++-": "-1", "-++": "+2", "-+-": "-2",
          "--+": "+3", "---": "-3", "+-+": "+4", "+--": "-4"}
     # loop for counting total octant values
-    for i in range(len(aa)):
+    for i in range(len(a_uavg)):
         x = ""
-        if (aa[i] < 0):
+        if (a_uavg[i] < 0):
             x += '-'
         else:
             x += '+'
-        if (bb[i] < 0):
+        if (b_vavg[i] < 0):
             x += '-'
         else:
             x += '+'
-        if (cc[i] < 0):
+        if (c_cavg[i] < 0):
             x += '-'
         else:
             x += '+'
