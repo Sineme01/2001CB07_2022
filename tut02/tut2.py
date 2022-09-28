@@ -98,6 +98,30 @@ def octant_transition_count(mod=5000):
     present_row += 1
     wsheet[gl(14)+str(present_row)] = "To"
     present_row += 1
+    wsheet[gl(12)+str(present_row)] = "From"
+    s = present_row
+    for p in range(8):
+        for r in range(8):
+            dictionary1[listf[p]+listf[r]] = gl(14+r)+str(s)
+        s += 1
+    present_row += 1
+    s = present_row
+    v = octant
+    for j in range(len(v)-1):
+        x = v[j]+v[j+1]
+        if (wsheet[dictionary1[x]].value):
+            wsheet[dictionary1[x]] = wsheet[dictionary1[x]].value+1
+        else:
+            wsheet[dictionary1[x]] = 1
+    border1 = borders.Side(style=None, color='FF000000', border_style='thin')
+    border0 = borders.Side(style=None, color='FF000000', border_style='thin')
+    thin = Border(left=border1, right=border0, bottom=border0, top=border0)
+    for row in wsheet.iter_rows(min_row=present_row-2, min_col=13, max_row=present_row+6, max_col=13+8):
+        for cell in row:
+            cell.border = thin
+        for it in row:
+            cnt += 1
+    present_row += 9
     wbook.save("output_octant_transition_identify.xlsx")
 
 
