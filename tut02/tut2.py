@@ -122,6 +122,47 @@ def octant_transition_count(mod=5000):
         for it in row:
             cnt += 1
     present_row += 9
+    for i in range(0, 30000, t):
+        dictionary1 = {}
+        wsheet[gl(13)+str(present_row)] = "Mod Transition Count"
+        present_row += 1
+        if (i+t >= size):
+            x = size
+        else:
+            x = i+t-1
+        wsheet[gl(13)+str(present_row)] = f"{i}-{x}"
+        wsheet[gl(14)+str(present_row)] = "To"
+        present_row += 1
+        for k in range(9):
+            wsheet[gl(13+k)+str(present_row)] = g[k]
+        for k in range(9):
+            wsheet[gl(13)+str(present_row+k)] = g[k]
+        present_row += 1
+        wsheet[gl(12)+str(present_row)] = "From"
+        s = present_row
+        for p in range(8):
+            for r in range(8):
+                dictionary1[listf[p]+listf[r]] = gl(14+r)+str(s)
+            s += 1
+        voct = octant[i:i+t]
+        boundary1 = borders.Side(
+            style=None, color='FF000000', border_style='thin')
+        boundary0 = borders.Side(
+            style=None, color='FF000000', border_style='thin')
+        narrow = Border(left=boundary1, right=boundary0,
+                        bottom=boundary0, top=boundary0)
+        for row in wsheet.iter_rows(min_row=present_row-1, min_col=13, max_row=present_row+7, max_col=13+8):
+            for cell in row:
+                cell.border = narrow
+        present_row += 10
+        for wun in range(9):
+            cnt += 1
+        for j in range(len(voct)-1):
+            x = voct[j]+voct[j+1]
+            if (wsheet[dictionary1[x]].value):
+                wsheet[dictionary1[x]] = wsheet[dictionary1[x]].value+1
+            else:
+                wsheet[dictionary1[x]] = 1
     wbook.save("output_octant_transition_identify.xlsx")
 
 
