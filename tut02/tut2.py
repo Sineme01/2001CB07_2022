@@ -38,7 +38,7 @@ def octant_transition_count(mod=5000):
             wsheet[gl(i+8)+str(j+1)] = clist[i][j-1]-meanval[i]
     dictionary = {'+++': "+1", "++-": "-1", "-++": "+2", "-+-": "-2",
                   "--+": "+3", "---": "-3", "+-+": "+4", "+--": "-4"}
-    wsheet[gl(11)+"1"] = "Octat"
+    wsheet[gl(11)+"1"] = "Octant"
     # The loop below is used to compute octant values.
     for i in range(1, size+1):
         x = ""
@@ -52,6 +52,40 @@ def octant_transition_count(mod=5000):
     for i in range(len(listf)):
         wsheet[gl(i+14)+"1"] = listf[i]
     wsheet[gl(13)+"2"] = "Overall Count"
+    wbook.save("output_octant_transition_identify.xlsx")
+    octant = []
+    for i in range(1, size+1):
+        octant.append(wsheet[gl(11)+str(i+1)].value)
+    for i in range(8):
+        wsheet[gl(14+i)+"2"] = octant.count(listf[i])
+    wsheet[gl(12)+'3'] = "User Input"
+    t = mod
+    wsheet[gl(13)+'3'] = f"Mod {t}"
+    present_row = 4
+    # counting octant in different intervals.
+    for i in range(0, 30000, t):
+        if (i+t >= size):
+            x = size
+        else:
+            x = i+t-1
+        wsheet[gl(13)+str(present_row)] = f"{i}-{x}"
+        v = octant[i:i+t]
+        for j in range(8):
+            wsheet[gl(14+j)+str(present_row)] = v.count(listf[j])
+        present_row += 1
+    wsheet[gl(13)+str(present_row)] = "Verified"
+    # counting total sum of individual +1,-1,+2... column for the purpose of verification.
+    for i in range(8):
+        ch = gl(i+14)
+        wsheet[gl(14+i)+str(present_row)
+               ] = f'=SUM({gl(14+i)+str(4)}:{gl(14+i)+str(present_row-1)})'
+    # Here is the code for designing borders.
+    border1 = borders.Side(style=None, color='FF000000', border_style='thin')
+    border0 = borders.Side(style=None, color='FF000000', border_style='thin')
+    thin = Border(left=border1, right=border0, bottom=border0, top=border0)
+    for row in wsheet.iter_rows(min_row=1, min_col=13, max_row=present_row, max_col=13+8):
+        for cell in row:
+            cell.border = thin
     wbook.save("output_octant_transition_identify.xlsx")
 
 
