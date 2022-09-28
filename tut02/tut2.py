@@ -86,6 +86,18 @@ def octant_transition_count(mod=5000):
     for row in wsheet.iter_rows(min_row=1, min_col=13, max_row=present_row, max_col=13+8):
         for cell in row:
             cell.border = thin
+    dictionary1 = {}
+    g = ['Count', "+1", "-1", "+2", "-2", "+3", "-3", "+4", "-4"]
+    # counting the size of g.
+    cnt = 0
+    for it in g:
+        cnt += 1
+    # Here I am calculating overall transition.
+    present_row += 3
+    wsheet[gl(13)+str(present_row)] = "Overall Transition Count"
+    present_row += 1
+    wsheet[gl(14)+str(present_row)] = "To"
+    present_row += 1
     wbook.save("output_octant_transition_identify.xlsx")
 
 
