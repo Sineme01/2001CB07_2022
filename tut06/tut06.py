@@ -34,3 +34,19 @@ def Check_Days(s):
         f'{map_months[month]} {date}, {year}', '%B %d, %Y').strftime('%A')
 
     return x
+
+
+def func_sort_date(date):
+    dateList = list(date)
+    siz = len(dateList)
+    for i in range(siz):
+        var = dateList[i].split("-")
+        flag = var[2]+var[1]+var[0]
+        dateList[i] = flag
+    # sorting the date list for proper view of attendance report.
+    dateList.sort()
+    for i in range(siz):
+        var = dateList[i][-2:]+'-'+dateList[i][-4:-2]+'-'+dateList[i][:4]
+        dateList[i] = var
+
+    return dateList
