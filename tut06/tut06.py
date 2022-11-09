@@ -50,3 +50,33 @@ def func_sort_date(date):
         dateList[i] = var
 
     return dateList
+
+
+dataFrame = pd.read_csv(
+    "input_registered_students.csv")
+Roll = list(dataFrame['Roll No'])
+name = list(dataFrame['Name'])
+rool_key_map_name_store = {}
+Siz = len(Roll)
+for i in range(Siz):
+    rool_key_map_name_store[Roll[i]] = name[i]
+
+dict_time = {}
+Attendace_Dataframe = pd.read_csv("input_attendance.csv")
+t_list = list(Attendace_Dataframe['Timestamp'])
+nm_list = list(Attendace_Dataframe['Attendance'])
+registration__check = {}
+for i in nm_list:
+    dict_time[i[:8]] = []
+for i in nm_list:
+    registration__check[i[:8]] = 1
+Siz = len(t_list)
+for i in range(Siz):
+    Day_list = nm_list[i][:8]
+    dict_time[Day_list].append(t_list[i])
+date_list = set()
+for i in t_list:
+    Day_list = Check_Days(i)
+    if (Day_list == 'Monday' or Day_list == 'Thursday'):
+        date_list.add(i.split(" ")[0])
+date_list = func_sort_date(date_list)
