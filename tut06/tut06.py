@@ -80,3 +80,68 @@ for i in t_list:
     if (Day_list == 'Monday' or Day_list == 'Thursday'):
         date_list.add(i.split(" ")[0])
 date_list = func_sort_date(date_list)
+
+
+def attendance_sheet(roll):
+    attributes = ['Date', 'Roll No', 'Name', 'Total Attendance Count',
+                  'Real', 'Duplicate', 'Invalid', 'Absent']
+    wbook = xl.Workbook(f"{path}/{roll}.xlsx")
+    ws = wbook.add_worksheet(f'{roll}')
+    wbook.close()
+    wbook = load_workbook(f"{path}/{roll}.xlsx")
+    ws = wbook.active
+    C_row = 1
+    for i in range(len(attributes)):
+        ws[gl(i+1)+str(C_row)] = attributes[i]
+    ws[gl(2)+str(2)] = roll
+    ws[gl(3)+str(2)] = rool_key_map_name_store[roll]
+    C_row += 2
+    for i in range(len(date_list)):
+        ws[gl(1)+str(i+C_row)] = date_list[i]
+    C_row = 3
+    for i in range(len(date_list)):
+        x = date_list[i]
+        attendance_time = []
+        for j in dict_time[roll]:
+            y = j.split(" ")[1]
+            z = j.split(" ")[0]
+            if (x == z):
+                attendance_time.append(y)
+        inv = 0
+        for k in attendance_time:
+            pt = dt.datetime.strptime(k, '%H:%M')
+            total_seconds = pt.second + pt.minute*60 + pt.hour*3600
+            if (total_seconds < 14*3600 or total_seconds > 15*3600):
+                inv += 1
+        Ttl_attend = len(attendance_time)
+        duplicate = 0
+        real = 0
+        absent = 0
+        if (Ttl_attend-inv != 0):
+            real = 1
+            duplicate = max(duplicate, Ttl_attend-inv-1)
+        else:
+            absent = 1
+        f = [Ttl_attend, real, duplicate, inv, absent]
+        for p in range(4, 9):
+            ws[gl(p)+str(C_row+i)] = f[p-4]
+        wbook.save(f"{path}/{roll}.xlsx")
+
+
+for i in rool_key_map_name_store:
+    if (i in registration__check):
+        attendance_sheet(i)
+
+end_time = datetime.now()
+
+print('Duration of Program Execution: {}'.format(end_time - start_time))
+
+
+# Code
+
+ver = python_version()
+
+if ver == "3.8.10":
+    print("Correct Version Installed")
+else:
+    print("Please install 3.8.10. Instruction are present in the GitHub Repo/Webmail. Url: https://pastebin.com/nvibxmjw")
