@@ -20,3 +20,17 @@ try:
     os.mkdir(path)  # create a folder in my directory named output.
 except OSError as error:
     print(error)
+
+
+def Check_Days(s):
+    ps = s
+    j, t = ps.split(" ")
+    date, month, year = j.split("-")
+    map_months = {'01': "January", '02': "February", "03": "March", "04": "April", "05": "May", "06": "June", '07': 'July', "08": "August", '09': "September", "10": 'October',
+                  '11': "November", "12": "December"}
+
+   # strptime() is another method available in DateTime which is used to format the time stamp.
+    x = dt.datetime.strptime(
+        f'{map_months[month]} {date}, {year}', '%B %d, %Y').strftime('%A')
+
+    return x
