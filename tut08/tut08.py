@@ -5,7 +5,7 @@ start_time = datetime.datetime.now()
 def scorecard():
 
 	sys.stdout = open('Scorecard.txt','wt')
-	f=open('team.txt',"r")
+	f=open('teams.txt',"r")
 	a=f.readlines()
 	f1=open("pak_inns1.txt","r")
 	com1=f1.readlines()

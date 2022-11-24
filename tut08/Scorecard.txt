@@ -39,7 +39,7 @@ Hardik Pandya                not out                                33      17  
 Dinesh Karthik(w)            not out                                1       1     0      0    100.0
 Extras                                                                 14(b 0, lb 5, w 9, nb 0, p 0)
 Total                                                                  148(5 wkts, 19.4 Ov)
-Did not bat          Avesh Khan, Arshdeep Singh, Yuzvendra Chahal, Bhuvneshwar Kumar
+Did not bat          Avesh Khan, Arshdeep Singh, Bhuvneshwar Kumar, Yuzvendra Chahal
 Fall of Wickets
 1-1 (KL Rahul,0.2), 50-2 (Rohit Sharma(c),7.6), 53-3 (Virat Kohli,9.1), 89-4 (Suryakumar Yadav,14.2
 ), 141-5 (Ravindra Jadeja,19.1)
@@ -51,4 +51,4 @@ Shadab Khan                                                  4     0    19    0 
 Mohammad Nawaz                                               3.4   0    33    3     0    0     9.0
 Powerplays                                     Overs                                          Runs
 Mandatory                                      0.1-6                                           38
-Duration of Program Execution: 0:00:00.031907
+Duration of Program Execution: 0:00:00.038226
