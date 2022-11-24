@@ -4,7 +4,7 @@ from platform import python_version
 import pandas as pd
 
 
-def octact_identification(mod=5000):
+def octant_identification(mod=5000):
     # Here we created our dataFrame and named it matrix.
     matrix = pd.read_csv("octant_input.csv")
     # Here using pandas library i have calculated mean of u,v,and w and stored it into a variable.
@@ -82,3 +82,4 @@ def octact_identification(mod=5000):
     # Appending both the  dataFrames in single one.
     final = pd.concat(Frames, axis=1)
     final.to_csv("octant_output.csv", index=False)
+octant_identification()
