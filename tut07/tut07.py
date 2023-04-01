@@ -1,5 +1,4 @@
 # importing modules.
-!pip install openpyxl
 from platform import python_version
 from openpyxl import workbook, load_workbook
 from openpyxl.styles.borders import Border
